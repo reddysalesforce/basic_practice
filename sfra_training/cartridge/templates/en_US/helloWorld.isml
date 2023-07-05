@@ -1,3 +1,5 @@
 
 <p>Hello world from site ${pdict.param1}</p>
-======================
+
+Param 2
+<p>${pdict.param2}</p>
