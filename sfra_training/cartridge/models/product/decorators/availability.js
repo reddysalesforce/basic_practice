@@ -1,11 +1,13 @@
 'use strict';
 
 var resource = require('dw/web/Resource');
+var base = module.superModule;
 
 module.exports = function (object, quantity, minOrderQuantity, availabilityModel) {
     //invoke the availability model on the base
     base.call(this, object, quantity, minOrderQuantity, availabilityModel);
-
+    
+    //Define a new property in the model with ATS as its value
     Object.defineProperty(object, 'ats', {
         enumerable: true,
         value: getATSMessage(availabilityModel)
@@ -14,7 +16,10 @@ module.exports = function (object, quantity, minOrderQuantity, availabilityModel
 
 function getATSMessage(availabilityModel){
     var ATS = {};
+    ATS.messages = [];
     var inventoryRecord = availabilityModel.inventoryRecord;
+    
+    //Add a new message to the array of avaialbility messages(just like the base does)
     if(inventoryRecord) {
         ATS.messages.push(
             Resource.msgf(
