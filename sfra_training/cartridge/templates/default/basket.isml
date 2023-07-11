@@ -1,0 +1,11 @@
+
+<isif condition="${pdict.basket.getProductLineItems().isEmpty()}">
+    No basket exists
+<iselse/>
+    <isloop items="${pdict.basket.getProductLineItems()}" var="productLineItem" status="loopstate">
+        ${productLineItem.product.name}<br/>
+        count ${loopstate.count}
+        Index ${loopstate.index}
+        ${productLineItem.product.name}
+    </isloop>
+</isif>
