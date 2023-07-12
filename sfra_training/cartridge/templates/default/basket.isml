@@ -1,2 +1,16 @@
-=====================
-${JSON.stringify(pdict.basketModel.numItems)}
+<isdecorate template="common/layout/page">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addCss('/css/cart.css');
+    </isscript>
+    <isif condition="${pdict.basketModel.getProductLineItems().isEmpty()}">
+        No basket exists
+    <iselse/>
+    <isloop items="${pdict.basketModel.items}" var="lineItem" status="loopstate">
+        <!--- name and remove buttons --->
+        <isinclude template="cart/productCard/cartProductCardHeader" />
+        <isinclude template="cart/productCard/cartProductCardProductPrice" />
+        <isinclude template="cart/productCard/cartProductCardAvailability" />
+    </isloop>
+</isif>
+</isdecorate>
