@@ -6,11 +6,12 @@
     <isif condition="${pdict.basketModel.getProductLineItems().isEmpty()}">
         No basket exists
     <iselse/>
+    <h2>${Resource.msg('title.cart','cart',null)}</h2>
     <isloop items="${pdict.basketModel.items}" var="lineItem" status="loopstate">
         <!--- name and remove buttons --->
-        <isinclude template="cart/productCard/cartProductCardHeader" />
-        <isinclude template="cart/productCard/cartProductCardProductPrice" />
-        <isinclude template="cart/productCard/cartProductCardAvailability" />
+        ${Resource.msg('product.name','cart',null)} <isinclude template="cart/productCard/cartProductCardHeader" />
+        ${Resource.msg('product.price','cart',null)} <isinclude template="cart/productCard/cartProductCardProductPrice" />
+        ${Resource.msg('product.availability','cart',null)} <isinclude template="cart/productCard/cartProductCardAvailability" />
     </isloop>
 </isif>
 </isdecorate>
