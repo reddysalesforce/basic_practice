@@ -1,5 +1,6 @@
 <isdecorate template="common/layout/page">
 <p>Use of prepend/append/replace using viewData: ${pdict.param1}</p>
+<isinclude url="${URLUtils.url('Basket-Show')}" />
     <!-- +1.888.555.0199 --><!--This phone is a requirement to support existing Gomez monitor of SiteGenesis. Demandware customers can remove this.-->
     <div class="home-main homepage">
         <isslot id="home-main-m" description="Main home page slot." context="global" />
