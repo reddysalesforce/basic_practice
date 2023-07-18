@@ -1,0 +1,7 @@
+<isdecorate template="common/layout/page">
+    <h3>
+        ${pdict.newsletterForm.fname.value} ${pdict.newsletterForm.lname.value} thank you for registering!
+    </h3>
+    <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+    Back to  <a href="${pdict.continueUrl}">Newsletter Subscription</a>
+</isdecorate>
