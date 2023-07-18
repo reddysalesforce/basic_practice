@@ -2,6 +2,7 @@
     <isscript>
         var assets = require('*/cartridge/scripts/assets.js');
         assets.addCss('/css/login.css');
+        assets.addJs('/js/newsletter.js');
     </isscript>
     <div class="row justify-content-center equal-height">
         <div class="col-sm-8 col-md-6">
