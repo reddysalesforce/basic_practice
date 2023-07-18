@@ -2,8 +2,10 @@
 
 var server = require('server');
 var URLUtils = require('dw/web/URLUtils');
+//Use the following for CSRF protection: add middleware in routes and hidden field on form
+var csrfProtection = require('*/cartridge/scripts/middleware/csrf');
 
-server.get('Show', server.middleware.https, function (req, res, next) {
+server.get('Show', server.middleware.https, csrfProtection.generateToken, function (req, res, next) {
   var actionUrl = dw.web.URLUtils.url('Newsletter-Handler');
   var newsletterForm = server.forms.getForm('newsletter');
   newsletterForm.clear();
@@ -19,6 +21,7 @@ server.get('Show', server.middleware.https, function (req, res, next) {
 server.post(
     'Handler',
     server.middleware.https,
+    csrfProtection.validateAjaxRequest,
     function (req, res, next) {
         var newsletterForm = server.forms.getForm('newsletter');
         var continueUrl = dw.web.URLUtils.url('Newsletter-Show');
