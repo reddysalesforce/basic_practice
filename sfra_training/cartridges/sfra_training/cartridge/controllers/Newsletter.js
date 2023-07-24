@@ -29,32 +29,36 @@ server.post(
       var continueUrl = dw.web.URLUtils.url('Newsletter-Show');
 
       if (newsletterForm.valid) {
+        var Transaction = require('dw/system/Transaction');
         try {
-          var CustomObjectMgr = require('dw/object/CustomObjectMgr');
-          var co = CustomObjectMgr.createCustomObject('NewsletterSubscription', newsletterForm.email.value);
-          co.custom.firstName = newsletterForm.fname.value;
-          co.custom.lastName = newsletterForm.lname.value;
-                 // Show the success page
-          res.json({
-            success: true,
-            redirectUrl: URLUtils.url('Newsletter-Success').toString()
-          });
+            Transaction.wrap(function(){
+            var CustomObjectMgr = require('dw/object/CustomObjectMgr');
+            var co = CustomObjectMgr.createCustomObject('NewsletterSubscription', newsletterForm.email.value);
+            co.custom.firstName = newsletterForm.fname.value;
+            co.custom.lastName = newsletterForm.lname.value;
+            
+            res.json({
+                success: true,
+                redirectUrl: URLUtils.url('Newsletter-Success').toString()
+            });
+            });
+            
         } catch (e) {
-          var err = e;
+            var err = e;
+            res.setStatusCode(500);
+            res.json({
+                error: true,
+                redirectUrl: URLUtils.url('Error-Start').toString()
+            });
+        }
+    } else {
+          // Handle server-side validation errors here: this is just an example
           res.setStatusCode(500);
           res.json({
             error: true,
             redirectUrl: URLUtils.url('Error-Start').toString()
           });
-        }
-      } else {
-            // Handle server-side validation errors here: this is just an example
-        res.setStatusCode(500);
-        res.json({
-          error: true,
-          redirectUrl: URLUtils.url('Error-Start').toString()
-        });
-      }
+    }
 
       next();
     }
